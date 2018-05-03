@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>simple-panorama-stitcher-for-mmd</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+      img {
+        max-width: 100%;
+      }
+      .bs-callout {
+        padding: 20px;
+        margin: 20px 0;
+        border: 1px solid #eee;
+        border-left-width: 5px;
+        border-radius: 3px;
+      }
+      .bs-callout h3 {
+        margin-top: 0;
+        margin-bottom: 5px;
+        font-size: 150%;
+      }
+      .bs-callout p:last-child {
+        margin-bottom: 0;
+      }
+      .bs-callout code {
+        border-radius: 3px;
+      }
+      .bs-callout+.bs-callout {
+        margin-top: -5px;
+      }
+      .bs-callout-default {
+        border-left-color: #777;
+      }
+      .bs-callout-default h3 {
+        color: #777;
+      }
+      .bs-callout-primary {
+        border-left-color: #428bca;
+      }
+      .bs-callout-primary h3 {
+        color: #428bca;
+      }
+      .bs-callout-success {
+        border-left-color: #5cb85c;
+      }
+      .bs-callout-success h3 {
+        color: #5cb85c;
+      }
+      .bs-callout-danger {
+        border-left-color: #d9534f;
+      }
+      .bs-callout-danger h3 {
+        color: #d9534f;
+      }
+      .bs-callout-warning {
+        border-left-color: #f0ad4e;
+      }
+      .bs-callout-warning h3 {
+        color: #f0ad4e;
+      }
+      .bs-callout-info {
+        border-left-color: #5bc0de;
+      }
+      .bs-callout-info h3 {
+        color: #5bc0de;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1>simple-panorama-stitcher-for-mmd</h1>
+          <p>
+            simple-panorama-stitcher-for-mmdは、MMD（またはMMM）で360°パノラマ静止画を作るためのツールです。<br>
+            <a href="https://www.axfc.net/u/3908031/spsfm">ここからダウンロード</a>できます。
+          </p>
+          <p>
+            このガイドに沿って作成を進めていくと、360°パノラマ静止画を作って公開することができます。<br>
+            このガイドは<a href="https://aqgts.github.io/spsfm/">Web版</a>とダウンロード版（上記ダウンロードリンクに同梱）があり、どちらも同じ内容です。<br>
+            このガイド内でMMDについて言及している事項は、特記しない限りMMMにも適用可能です。
+          </p>
+          <p>
+            このガイドは以下のような構成になっています。
+          </p>
+          <ul>
+            <li><a href="#step0">ステップ0：どんなものが作れるか確認しよう</a></li>
+            <li><a href="#step1">ステップ1：必要なソフトをインストールしよう</a></li>
+            <li><a href="#step2">ステップ2：MMDの物理を切ろう</a></li>
+            <li><a href="#step3">ステップ3：カメラモーションを作成しよう</a></li>
+            <li><a href="#step4">ステップ4：録画しよう</a></li>
+            <li><a href="#step5">ステップ5：360°パノラマ静止画を作ろう</a></li>
+            <li><a href="#step6">ステップ6：360°パノラマ静止画を閲覧しよう</a></li>
+            <li><a href="#step7">ステップ7：360°パノラマ静止画を公開しよう</a></li>
+          </ul>
+          <section>
+            <h2 id="step0">ステップ0：どんなものが作れるか確認しよう</h2>
+            <p>
+              下のような画像を360°パノラマ静止画と呼びます。<br>
+            </p>
+            <p>
+              <img src="step0/guide/1.png" alt="Equirectangular形式と呼ばれる歪んだ画像">
+            </p>
+            <p>
+              これ単体ではただの歪んだ画像ですが、この画像を特殊なビューアで読み込むことにより、360°ぐりぐり回して風景を楽しむことができるようになります。<br>
+              いろいろなフリーソフトやスマホアプリをビューアとして使うことができますが、このガイドでは<a href="step6/index.html">A-Frameという技術を使って作られたビューア</a>をおすすめしていきます。<br>
+              上記ビューアを試してみるには、リンク先に飛んで、<a href="step0/panorama.png">step0フォルダの中にあるpanorama.png</a>を読み込んでみるとよいでしょう。
+            </p>
+            <p>
+              さらに、このガイドに従うと、<a href="https://spsfm-example.glitch.me/">上記ビューアにあらかじめ画像を読み込ませた状態のものをWeb上へ公開することができます</a>。<br>
+              例えば以下のようにすると、あなたが作った360°パノラマ静止画を皆に共有することができます。
+            </p>
+            <p>
+              <img src="step0/guide/2.png" alt="Twitterでの共有例（リンクと共にサムネを貼る）">
+            </p>
+            <div class="bs-callout bs-callout-info">
+              <h3>もっと詳しい説明</h3>
+              <p>
+                MMDで360°パノラマ静止画を作る方法はこれまでにも存在していましたが、このツールの新しい点は、手法がシンプルであるがために既存のエフェクトと相性がよいという点です。<br>
+                例えば今までにあった手法では、<a href="https://github.com/ray-cast/ray-mmd">ray-mmd</a>を使いながら360°パノラマ静止画を作ることは困難でした。
+              </p>
+              <p>
+                このツールは360°パノラマ静止画を作るために、MMD上でカメラを360°回転させて、撮影した画像を後から合成するという手法をとっています。<br>
+                既存のエフェクトにほとんど特殊な要求をしないので、自然な感覚で360°パノラマ静止画を作ることができます。
+              </p>
+            </div>
+            <div class="bs-callout bs-callout-warning">
+              <h3>注意事項</h3>
+              <p>
+                ほぼ唯一の制限として、時間に依存して変化が起こるエフェクトとは相性が悪いです。（例: 桜の花びらが散るパーティクル系エフェクトなど）<br>
+                該当エフェクトを改造して時間による変化が起きないようにすればよいのですが、難しいかもしれません。
+              </p>
+            </div>
+            <div class="bs-callout bs-callout-danger">
+              <h3>注意事項</h3>
+              <p>
+                以前、MMDで360°パノラマ静止画を作るというのは、モデラーさんらが想定していない使い方にあたるのではないか（だから個別に許可をとる必要があるのではないか）という<a href="https://archive.fo/Wpdea">議論がなされたことがあります</a>。<br>
+                各モデルやエフェクトなどの規約をよく読むのは当然のことですが、その上でもしあなたが必要と考えるのであれば、個別に許可をとってください。
+              </p>
+            </div>
+          </section>
+          <section>
+            <h2 id="step1">ステップ1：必要なソフトをインストールしよう</h2>
+            <p>
+              このツールを使うのに必要なソフトは以下の3つです。
+            </p>
+            <ul>
+              <li><a href="http://www.geocities.jp/higuchuu4/">MikuMikuDance</a>（または<a href="https://sites.google.com/site/mikumikumoving/">MikuMikuMoving</a>）</li>
+              <li><a href="https://www.microsoft.com/ja-jp/download/details.aspx?id=56115">.NET Framework 4.7.1</a></li>
+              <li><a href="https://www.ffmpeg.org/">FFmpeg</a></li>
+            </ul>
+            <p>
+              このツールを使うような人はMikuMikuDanceないしMikuMikuMovingは普通に持っているでしょうし、.NET Framework 4.7.1のインストールも簡単にできると思います。<br>
+              FFmpegのインストールはつまづきやすいかと思いますので、詳細に説明します。
+            </p>
+            <p>
+              <a href="https://www.ffmpeg.org/">https://www.ffmpeg.org/</a>にアクセスしたら、以下のようにして赤枠で囲まれた部分をクリックしていってください。<br>
+              画像2枚目と3枚目の中央に鎮座している大きなDownloadアイコンはプログラマ向けのものであって、我々ただのユーザー向けのものではないので、間違えてクリックしないようにしてください。
+            </p>
+            <p>
+              <img src="step1/guide/1.jpg" alt="Downloadアイコンをクリック">
+            </p>
+            <p>
+              <img src="step1/guide/2.jpg" alt="Windowsアイコンをクリック">
+            </p>
+            <p>
+              <img src="step1/guide/3.jpg" alt="Windows Buildsをクリック">
+            </p>
+            <p>
+              FFmpegをダウンロードする前の最後の画面が以下です。<br>
+              ここではバージョンとして下の方（安定版）を選んでください。<br>
+              Windows 64-bitかWindows 32-bitかはお使いのOSに応じて選んでください。<br>
+              LinkingはStaticにしてダウンロードします。<br>
+              ダウンロードしたら中身を適当な場所に解凍してください。
+            </p>
+            <p>
+              <img src="step1/guide/4.png" alt="バージョンは下、OSはWindows 32bitかWindows 64bit、LinkingはStatic">
+            </p>
+            <p>
+              解凍したら、binフォルダの中にあるffmpeg.exeをコピーして、このツールのstep5フォルダの中に置いてください。<br>
+              それが済んだら、ffmpeg.exeが入っていた元のフォルダは消してもよいです。
+            </p>
+            <p>
+              <img src="step1/guide/5.png" alt="binフォルダの中にffmpeg.exeがある">
+            </p>
+            <p>
+              <img src="step1/guide/6.png" alt="ffmpeg.exeをこのツールのstep5フォルダの中に置く">
+            </p>
+            <p>
+              最後に、step5フォルダの中にあるffmpeg.exeとpanorama.exeのそれぞれについて、右クリック→プロパティから「許可する」にチェックを入れて適用を押すようにしてください。
+            </p>
+            <p>
+              <img src="step1/guide/7.png" alt="「許可する」にチェックする">
+            </p>
+          </section>
+          <section>
+            <h2 id="step2">ステップ2：MMDの物理を切ろう</h2>
+            <p>
+              ステップ2～4の説明はMMDをベースに行います。<br>
+              MMMユーザーの方は適当に読み替えてください。
+            </p>
+            <p>
+              このツールはカメラを360°回転させてパノラマ静止画作りに必要な情報を撮る関係上、カメラが回転している間にスカートや髪が揺れ動いてしまうと正しく360°パノラマ静止画を作れなくなってしまいます。<br>
+              それを防ぐために物理演算を切っておきます。
+            </p>
+            <p>
+              単純に物理演算を切るだけだとスカートや髪が初期状態のままになってしまうので、物理演算結果を記録しておく（物理焼き込み）ようにします。<br>
+              物理焼き込みにはいろいろな方法がありえますが、ここでは最も単純なものを説明します。<br>
+              物理演算に詳しい方は自分なりに方法をアレンジしてもよいです。
+            </p>
+            <p>
+              モデル操作モードに入ったら、上のメニューから、物理演算→物理影響ボーン選択、を選びます。
+            </p>
+            <p>
+              <img src="step2/guide/1.png" alt="物理ボーンを選ぶ">
+            </p>
+            <p>
+              「物理」ボタンをクリックして、「物理」ボタンが青く光っていない状態にしてください。<br>
+              そうしたら、「登録」ボタンを押します。
+            </p>
+            <p>
+              <img src="step2/guide/2.png" alt="物理焼き込みをする">
+            </p>
+            <div class="bs-callout bs-callout-info">
+              <h3>もっと詳しい説明</h3>
+              <p>
+                わかる人向けの説明ですが、髪IKやネクタイIKのような物理影響下にあるIKは、オフにしておいた方がより焼き込みの精度が上がります。
+              </p>
+            </div>
+            <p>
+              上のメニューから、物理演算→演算しない、を選ぶと、物理演算を切ることができます。
+            </p>
+            <p>
+              <img src="step2/guide/3.png" alt="物理演算を切る">
+            </p>
+          </section>
+          <section>
+            <h2 id="step3">ステップ3：カメラモーションを作成しよう</h2>
+            <p>
+              360°パノラマ静止画を見たときに正面になるカメラの位置、向きを決めてください。<br>
+              カメラの距離は0にして調整してください。<br>
+              視野角はなんでもいいですが、大きめの数字にしておいた方が、360°パノラマで見たときに近い見た目になり調整しやすいです。（私は90°で調整しています）
+            </p>
+            <p>
+              <img src="step3/guide/1.png" alt="カメラの位置と向きを調整する">
+            </p>
+            <div class="bs-callout bs-callout-warning">
+              <h3>注意事項</h3>
+              <p>
+                よっぽど特殊な意図が無い限り、カメラ角度のXとZは0にしておいた方がよいです。<br>
+                最終的な360°パノラマ静止画を見たとき、重力方向がどちらかわからなくなり混乱するはずです。
+              </p>
+            </div>
+            <p>
+              カメラの位置と向きが決まったら、<a href="step3/index.html">リンク先のページ</a>にカメラ中心と角度の値を入力して、「VMD生成」ボタンを押してください。<br>
+              生成されたvmdファイルを適当な場所に保存しておきます。
+            </p>
+            <p>
+              <img src="step3/guide/2.png" alt="カメラモーションを生成する">
+            </p>
+            <p>
+              生成されたvmdファイルを、ファイル→モーションデータ読込、から読み込んでください。<br>
+              ずらっとダイヤマークが並んだら成功です。
+            </p>
+            <p>
+              <img src="step3/guide/3.png" alt="カメラモーションを読み込む">
+            </p>
+          </section>
+          <section>
+            <h2 id="step4">ステップ4：録画しよう</h2>
+            <p>
+              画面の出力サイズを上のメニューの、表示→出力サイズ、から変更してください。<br>
+              サイズを512×512にします。
+            </p>
+            <p>
+              <img src="step4/guide/1.png" alt="出力サイズを変更する">
+            </p>
+            <p>
+              <img src="step4/guide/2.png" alt="512×512にする">
+            </p>
+            <div class="bs-callout bs-callout-info">
+              <h3>もっと詳しい説明</h3>
+              <p>
+                実際は縦横比が1:1であればなんでもよいです。
+              </p>
+            </div>
+            <p>
+              適当な名前でaviファイルに出力してください。<br>
+              録画フレームは先ほどダイヤマークがずらっと並んだ72フレーム分の範囲を指定します。<br>
+              圧縮コーデックは未圧縮を指定します。
+            </p>
+            <p>
+              <img src="step4/guide/3.png" alt="録画する">
+            </p>
+            <div class="bs-callout bs-callout-info">
+              <h3>もっと詳しい説明</h3>
+              <p>
+                実際は可逆圧縮コーデックであればなんでもよいです。
+              </p>
+            </div>
+          </section>
+          <section>
+            <h2 id="step5">ステップ5：360°パノラマ静止画を作ろう</h2>
+            <p>
+              先ほど出力したaviファイルをドラッグして、step5フォルダの中のpanorama.exeの上でドロップしてください。<br>
+              うまくいくと下のような黒いウィンドウが出るので、100.0%になるまで待ってください。
+            </p>
+            <p>
+              <img src="step5/guide/1.png" alt="黒いウィンドウが出る">
+            </p>
+            <p>
+              100.0%になったとき、step5フォルダの中にできているpanorama.pngが360°パノラマ静止画の完成品です。<br>
+              おめでとうございます。
+            </p>
+            <div class="bs-callout bs-callout-info">
+              <h3>もっと詳しい説明</h3>
+              <p>
+                100.0%になる前であっても、panorama.pngを見ると合成の途中結果を確認できます。
+              </p>
+            </div>
+            <div class="bs-callout bs-callout-warning">
+              <h3>注意事項</h3>
+              <p>
+                おそらくpanorama.exeを実行しようとするとアンチウィルスソフトに弾かれるのではないかと思います。（そのまま実行できるならそれはそれでよいのですが）<br>
+                その場合、panorama.exeをアンチウィルスソフトの例外として登録してください。
+              </p>
+              <p>
+                アンチウィルスソフトに弾かれる理由は、単純にこのツールを実行したことがある人が少ないからです。<br>
+                別に怪しい処理はさせていません。
+              </p>
+            </div>
+          </section>
+          <section>
+            <h2 id="step6">ステップ6：360°パノラマ静止画を閲覧しよう</h2>
+            <p>
+              できた360°パノラマ静止画を<a href="step6/index.html">ビューア</a>に読み込ませます。<br>
+              楽しめましたか？
+            </p>
+          </section>
+          <section>
+            <h2 id="step7">ステップ7：360°パノラマ静止画を公開しよう</h2>
+            <p>
+              個人のウェブサイトを持っている人は、step7フォルダの中にあるviewer.htmlを、ステップ5で作ったpanorama.pngと共にアップロードすれば終わりです。<br>
+              お疲れさまでした。
+            </p>
+            <p>
+              ここから先は個人のウェブサイトを持っていない人向けの説明です。<br>
+              Glitchというサービスを使うと、360°パノラマ静止画をぐりぐり見渡せる形で公開することができます。<br>
+              Glitchのインターフェースはすべて英語ですが、使い方自体は単純なのでどうか怯まないでください。
+            </p>
+            <p>
+              まずは<a href="https://glitch.com/~aframe">このリンク先</a>に飛んでください。<br>
+              画面中ほどにある「Remix your own」ボタンを押します。
+            </p>
+            <p>
+              <img src="step7/guide/1.png" alt="「Remix your own」ボタンを押す">
+            </p>
+            <p>
+              しばし待ちます。
+            </p>
+            <p>
+              <img src="step7/guide/2.png" alt="待つ">
+            </p>
+            <p>
+              画面が下のようになったら、公開したい360°パノラマ静止画をページの上にドラッグアンドドロップします。
+            </p>
+            <p>
+              <img src="step7/guide/3.png" alt="パノラマ静止画をドラッグアンドドロップする">
+            </p>
+            <p>
+              assetsをクリックします。
+            </p>
+            <p>
+              <img src="step7/guide/4.png" alt="assetsをクリック">
+            </p>
+            <p>
+              画面中央に自分が追加したファイルがあるので、それをクリックしたら、「Copy Url」ボタンを押します。
+            </p>
+            <p>
+              <img src="step7/guide/5.png" alt="Copy Urlをクリック">
+            </p>
+            <p>
+              index.htmlをクリックします。
+            </p>
+            <p>
+              <img src="step7/guide/6.png" alt="index.htmlをクリック">
+            </p>
+            <p>
+              a-sceneタグの中身を消します。
+            </p>
+            <p>
+              <img src="step7/guide/7.png" alt="a-sceneタグの中身を消す">
+            </p>
+            <p>
+              a-sceneタグの中身に<code>&lt;a-sky src=&quot;&quot;&gt;&lt;/a-sky&gt;</code>と書いてください。<br>
+              <code>&quot;</code>と<code>&quot;</code>の間に先ほど「Copy Url」でコピーしたURLを貼りつけてください。
+            </p>
+            <p>
+              <img src="step7/guide/8.png" alt="a-skyタグを追加する">
+            </p>
+            <div class="bs-callout bs-callout-warning">
+              <h3>注意事項</h3>
+              <p>
+                入力する文字はすべて半角です。<br>
+                スペースのあるなしにも注意しましょう。
+              </p>
+            </div>
+            <p>
+              Shareをクリックします。
+            </p>
+            <p>
+              <img src="step7/guide/9.png" alt="Shareをクリック">
+            </p>
+            <p>
+              Share your Appの段にある「Copy」ボタンを押します。
+            </p>
+            <p>
+              <img src="step7/guide/10.png" alt="Copyをクリック">
+            </p>
+            <p>
+              今やあなたのクリップボードにはビューアの公開用URLがコピーされています。<br>
+              さっそく動作確認するなり他の人に共有するなりしてみてください。
+            </p>
+            <div class="bs-callout bs-callout-danger">
+              <h3>注意事項</h3>
+              <p>
+                Glitchはこのように匿名ユーザーでも公開用ページを作ることができますが、その代わり<strong>アカウントを作らない限り5日間でページが消えます！</strong><br>
+                Glitchのアカウントを作るには<strong>Facebookアカウントが必要です！</strong>
+              </p>
+              <p>
+                Facebookアカウントがある場合、画面右上の「Sign in」ボタンを使えばすぐにアカウント作成を終えることができます。<br>
+                アカウントを作った時点でページが永続化されます。<br>
+                他に何か特別な操作は要りません。
+              </p>
+            </div>
+            <div class="bs-callout bs-callout-warning">
+              <h3>注意事項</h3>
+              <p>
+                作った360°パノラマ静止画を公開する場合、公開用URLのほかに普通の画像とセットで公開することをおすすめします。<br>
+                URLだけでは誰も見向きもせず、せっかく作ったあなたの360°パノラマ静止画が埋もれてしまうはずです。
+              </p>
+            </div>
+          </section>
+          <section>
+            <h2>FAQ</h2>
+            <section>
+              <h3>動画は作れないの？</h3>
+              <p>
+                今のところ作れません。<br>
+                将来的に対応するかもしれないししないかもしれません。
+              </p>
+            </section>
+            <section>
+              <h3>もっと大きいサイズの静止画は作れないの？</h3>
+              <p>
+                今のところ作れません。<br>
+                将来的に対応するかもしれないししないかもしれません。
+              </p>
+            </section>
+            <section>
+              <h3>利用規約は？</h3>
+              <p>
+                ありません。<br>
+                あなたが使っているモデルやエフェクトなどの利用規約が許す限りにおいて、このツールもしくはこのツールを利用して作ったファイルをどのような用途へ利用しても構いません。<br>
+                また、<a href="https://github.com/aqgts/spsfm/">このツール自体の改造も歓迎しています。</a>
+              </p>
+            </section>
+          </section>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc&#x2F;r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>

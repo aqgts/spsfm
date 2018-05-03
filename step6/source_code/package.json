@@ -1,0 +1,38 @@
+{
+  "name": "spsfm-panorama-loader",
+  "version": "1.0.0",
+  "description": "Loader for panorama images.",
+  "private": true,
+  "scripts": {
+    "build": "browserify src/index.main.js -d -t babelify -o dist/index.main.js",
+    "build:watch": "watchify src/index.main.js -v -d -t babelify -o dist/index.main.js",
+    "build:release": "browserify src/index.main.js -t babelify | uglifyjs -c -o dist/index.main.js",
+    "clean": "git clean -X -d -f"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/aqgts/spsfm.git"
+  },
+  "author": "aq",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/aqgts/spsfm/issues"
+  },
+  "homepage": "https://aqgts.github.io/spsfm/step6/",
+  "engines": {
+    "node": "^9.5.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babelify": "^8.0.0",
+    "browserify": "^16.1.0",
+    "uglify-js": "^3.3.12",
+    "watchify": "^3.10.0"
+  },
+  "dependencies": {
+    "base64-js": "^1.3.0",
+    "mime": "^2.3.1"
+  }
+}
