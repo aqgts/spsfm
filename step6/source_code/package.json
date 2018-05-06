@@ -1,6 +1,6 @@
 {
   "name": "spsfm-panorama-loader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Loader for panorama images.",
   "private": true,
   "scripts": {

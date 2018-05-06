@@ -73,10 +73,10 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-          <h1>simple-panorama-stitcher-for-mmd</h1>
+          <h1>simple-panorama-stitcher-for-mmd 1.1.0</h1>
           <p>
             simple-panorama-stitcher-for-mmdは、MMD（またはMMM）で360°パノラマ静止画を作るためのツールです。<br>
-            <a href="https://www.axfc.net/u/3908031/spsfm">ここからダウンロード</a>できます。
+            <a href="https://www.axfc.net/u/3908790/spsfm">ここからダウンロード</a>できます。
           </p>
           <p>
             このガイドに沿って作成を進めていくと、360°パノラマ静止画を作って公開することができます。<br>
@@ -273,13 +273,13 @@
             <h2 id="step4">ステップ4：録画しよう</h2>
             <p>
               画面の出力サイズを上のメニューの、表示→出力サイズ、から変更してください。<br>
-              サイズを512×512にします。
+              サイズを1024×1024にします。
             </p>
             <p>
               <img src="step4/guide/1.png" alt="出力サイズを変更する">
             </p>
             <p>
-              <img src="step4/guide/2.png" alt="512×512にする">
+              <img src="step4/guide/2.png" alt="1024×1024にする">
             </p>
             <div class="bs-callout bs-callout-info">
               <h3>もっと詳しい説明</h3>
@@ -289,7 +289,7 @@
             </div>
             <p>
               適当な名前でaviファイルに出力してください。<br>
-              録画フレームは先ほどダイヤマークがずらっと並んだ72フレーム分の範囲を指定します。<br>
+              録画フレームは先ほどダイヤマークがずらっと並んだ12フレーム分の範囲を指定します。<br>
               圧縮コーデックは未圧縮を指定します。
             </p>
             <p>
@@ -449,8 +449,8 @@
             <section>
               <h3>動画は作れないの？</h3>
               <p>
-                今のところ作れません。<br>
-                将来的に対応するかもしれないししないかもしれません。
+                <a href="advanced/index.html">作れないこともないです。</a><br>
+                詳細はリンク先をご覧ください。
               </p>
             </section>
             <section>
@@ -467,6 +467,23 @@
                 あなたが使っているモデルやエフェクトなどの利用規約が許す限りにおいて、このツールもしくはこのツールを利用して作ったファイルをどのような用途へ利用しても構いません。<br>
                 また、<a href="https://github.com/aqgts/spsfm/">このツール自体の改造も歓迎しています。</a>
               </p>
+            </section>
+          </section>
+          <section>
+            <h2>更新履歴</h2>
+            <section>
+              <h3>1.1.0</h3>
+              <ul>
+                <li>パノラマ合成に必要な方向数を72方向から12方向に削減した。（つまり処理が速くなった）</li>
+                <li>動画出力に実験的に対応した。</li>
+                <li>step7フォルダの中にviewer.htmlを入れ忘れていたので追加した。</li>
+              </ul>
+            </section>
+            <section>
+              <h3>1.0.0</h3>
+              <ul>
+                <li>公開した。</li>
+              </ul>
             </section>
           </section>
         </div>

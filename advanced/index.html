@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>simple-panorama-stitcher-for-mmd 動画版</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+      img {
+        max-width: 100%;
+      }
+      .bs-callout {
+        padding: 20px;
+        margin: 20px 0;
+        border: 1px solid #eee;
+        border-left-width: 5px;
+        border-radius: 3px;
+      }
+      .bs-callout h3 {
+        margin-top: 0;
+        margin-bottom: 5px;
+        font-size: 150%;
+      }
+      .bs-callout p:last-child {
+        margin-bottom: 0;
+      }
+      .bs-callout code {
+        border-radius: 3px;
+      }
+      .bs-callout+.bs-callout {
+        margin-top: -5px;
+      }
+      .bs-callout-default {
+        border-left-color: #777;
+      }
+      .bs-callout-default h3 {
+        color: #777;
+      }
+      .bs-callout-primary {
+        border-left-color: #428bca;
+      }
+      .bs-callout-primary h3 {
+        color: #428bca;
+      }
+      .bs-callout-success {
+        border-left-color: #5cb85c;
+      }
+      .bs-callout-success h3 {
+        color: #5cb85c;
+      }
+      .bs-callout-danger {
+        border-left-color: #d9534f;
+      }
+      .bs-callout-danger h3 {
+        color: #d9534f;
+      }
+      .bs-callout-warning {
+        border-left-color: #f0ad4e;
+      }
+      .bs-callout-warning h3 {
+        color: #f0ad4e;
+      }
+      .bs-callout-info {
+        border-left-color: #5bc0de;
+      }
+      .bs-callout-info h3 {
+        color: #5bc0de;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1>simple-panorama-stitcher-for-mmd 動画版</h1>
+          <p>
+            360°パノラマ動画を作れるツールも同梱しています。<br>
+            ただし、音声を入れられない、作成が大変でしかも時間がかかる、といった欠点があり、まだ調整段階と言える代物です。<br>
+            それでも良ければ、このガイドに従うことで動画を作ることができます。
+          </p>
+          <ul>
+            <li><a href="#step0">ステップ0：どんなものが作れるか確認しよう</a></li>
+            <li><a href="#step1">ステップ1：必要なソフトをインストールしよう</a></li>
+            <li><a href="#step2">ステップ2：MMDの物理を切ろう</a></li>
+            <li><a href="#step3">ステップ3：カメラモーションを作成しよう</a></li>
+            <li><a href="#step4">ステップ4：録画しよう</a></li>
+            <li><a href="#step5">ステップ5：360°パノラマ動画を作ろう</a></li>
+            <li><a href="#step6">ステップ6：360°パノラマ動画を閲覧しよう</a></li>
+            <li><a href="#step7">ステップ7：360°パノラマ動画を公開しよう</a></li>
+          </ul>
+          <section>
+            <h2 id="step0">ステップ0：どんなものが作れるか確認しよう</h2>
+            <ul>
+            <li>ray-mmdなどの既存エフェクトが使用可能</li>
+            <li>サイズは4096×2048固定</li>
+            <li>フレームレートは30固定</li>
+            <li>音声なしのmp4ファイル</li>
+            </ul>
+          </section>
+          <section>
+            <h2 id="step1">ステップ1：必要なソフトをインストールしよう</h2>
+            <p>
+              静止画版と同じです。
+            </p>
+          </section>
+          <section>
+            <h2 id="step2">ステップ2：MMDの物理を切ろう</h2>
+            <p>
+              <a href="http://www.nicovideo.jp/watch/sm25422103">MMD Macro</a>やMMMの物理焼き込み機能などを使って物理焼き込みをしてください。
+            </p>
+          </section>
+          <section>
+            <h2 id="step3">ステップ3：カメラモーションを作成しよう</h2>
+            <p>
+              <a href="step3/index.html">リンク先</a>に飛んでzipファイルをダウンロードしてください。
+            </p>
+          </section>
+          <section>
+            <h2 id="step4">ステップ4：録画しよう</h2>
+            <p>
+              ステップ3でダウンロードした01.vmd～12.vmdを使って12方向分の録画をしてください。<br>
+              録画したファイルのファイル名はそれぞれ01.avi～12.aviとします。<br>
+              大変ですががんばってください。
+            </p>
+          </section>
+          <section>
+            <h2 id="step5">ステップ5：360°パノラマ動画を作ろう</h2>
+            <p>
+              advanced/step5フォルダの中のpanorama_video.exeとpanorama_video.exe.configを静止画版のstep5フォルダの中に移します。<br>
+              ステップ4で録画した12個の動画ファイルを全選択したらドラッグして、panorama_video.exeの上でドロップしてください。<br>
+              何時間待つことになるかは知りませんがひたすら待っていると、そのうちstep5フォルダの中にpanorama.mp4というファイルができています。
+            </p>
+          </section>
+          <section>
+            <h2 id="step6">ステップ6：360°パノラマ動画を閲覧しよう</h2>
+            <p>
+              今のところ動画用のビューアは作っていないのでこのツールでは動作確認できません。<br>
+              ほかの適当なフリーソフトなりスマホアプリなりを使ってください。
+            </p>
+          </section>
+          <section>
+            <h2 id="step7">ステップ7：360°パノラマ動画を公開しよう</h2>
+            <p>
+              YouTubeに投稿するのがおすすめです。<br>
+              <a href="https://support.google.com/youtube/answer/6178631?hl=ja">この辺り</a>を読んでがんばってください。
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc&#x2F;r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>

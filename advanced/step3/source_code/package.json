@@ -1,7 +1,7 @@
 {
-  "name": "spsfm-generate-motion",
-  "version": "1.0.1",
-  "description": "Generates the camera motion for SPSFM.",
+  "name": "spsfm-generate-motions",
+  "version": "1.0.0",
+  "description": "Generates the camera motions for SPSFM.",
   "private": true,
   "scripts": {
     "build": "browserify src/index.main.js -d -t babelify -o dist/index.main.js",
@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/aqgts/spsfm/issues"
   },
-  "homepage": "https://aqgts.github.io/spsfm/step3/",
+  "homepage": "https://aqgts.github.io/spsfm/advanced/step3/",
   "engines": {
     "node": "^9.5.0"
   },

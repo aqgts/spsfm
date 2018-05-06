@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace panorama {
     public class PanoramaPart {
-        private readonly double yaw;
-        private readonly double pitch;
+        private readonly Quaternion rotation;
         private readonly double angleOfView;
 
-        public PanoramaPart(double yaw, double pitch, double angleOfView) {
-            this.yaw = yaw;
-            this.pitch = pitch;
+        public PanoramaPart(Quaternion rotation, double angleOfView) {
+            this.rotation = rotation;
             this.angleOfView = angleOfView;
+        }
+        public PanoramaPart(double yaw, double pitch, double angleOfView)
+            : this(Quaternion.AngleAxis(yaw, new Vector3(0, 1, 0)) * Quaternion.AngleAxis(pitch, new Vector3(-1, 0, 0)), angleOfView) {
         }
 
         public Vector2 GetUV(double yaw, double pitch) {
-            Vector3 xyz = (Quaternion.AngleAxis(this.yaw, new Vector3(0, 1, 0)) * Quaternion.AngleAxis(this.pitch, new Vector3(-1, 0, 0))).Inverse
-                .Rotate(new Vector3(Math.Sin(yaw) * Math.Cos(pitch), Math.Sin(pitch), Math.Cos(yaw) * Math.Cos(pitch)));
+            Vector3 xyz = this.rotation.Inverse.Rotate(new Vector3(Math.Sin(yaw) * Math.Cos(pitch), Math.Sin(pitch), Math.Cos(yaw) * Math.Cos(pitch)));
             if (xyz.Z <= 0 || xyz.Y >= 1 || xyz.Y <= -1) return new Vector2(Double.NaN, Double.NaN);
 
             double tanRelativeYaw = xyz.X / xyz.Z;

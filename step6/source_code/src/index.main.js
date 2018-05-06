@@ -19,14 +19,14 @@ const loadAsync = async (file) => {
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementsByTagName("input")[0].addEventListener("change", async event => {
     if (event.target.files.length === 0) return;
-    loadAsync(event.target.files[0]);
+    await loadAsync(event.target.files[0]);
   });
   document.documentElement.addEventListener("dragover", event => {
     event.preventDefault();
   }, false);
-  document.documentElement.addEventListener("drop", function eventListener(event) {
+  document.documentElement.addEventListener("drop", async function eventListener(event) {
     event.preventDefault();
     document.body.removeEventListener("drop", eventListener);
-    loadAsync(event.dataTransfer.files[0]);
+    await loadAsync(event.dataTransfer.files[0]);
   }, false);
 });

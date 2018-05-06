@@ -51,5 +51,6 @@ namespace panorama {
             Vector3 imag = axis.Normalize() * Math.Sin(angle / 2);
             return new Quaternion(real, imag.X, imag.Y, imag.Z);
         }
+        public static Quaternion Identity { get; } = new Quaternion(1, 0, 0, 0);
     }
 }
